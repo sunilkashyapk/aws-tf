@@ -1,6 +1,6 @@
 variable "s3_bucket_name" {
     type = "string"
-    default = "sunil-kashyap"
+    default = "sunil-kashyap-1"
 }
 
 variable "s3_bucket_acl" {
