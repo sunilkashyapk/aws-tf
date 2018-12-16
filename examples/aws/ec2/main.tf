@@ -11,6 +11,21 @@ resource "aws_instance" "instance" {
     ami = "${var.ami}"
     instance_type = "${var.instance_type}"
     key_name = "${aws_key_pair.public_key_auth.id}"
+     provisioner "file" {
+      source      = "setup.sh"
+      destination = "/tmp/setup.sh"
+      connection {
+        type     = "ssh"
+        user     = "ubuntu"
+      }
+    }
+    provisioner "remote-exec" {
+      inline = ["sudo mv /tmp/setup.sh /usr/local/bin/setup.sh","chmod +x /usr/local/bin/setup.sh", "setup.sh"]
+      connection {
+        type     = "ssh"
+        user     = "ubuntu"
+      }
+    }
 }
 
 resource "aws_security_group" "public_open" {
