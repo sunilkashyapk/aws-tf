@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_key_pair" "public_key_auth" {
+resource "aws_key_pair" "public_key_auth_1" {
   key_name   = "${var.public_key_name}"
   public_key = "${file(var.public_key_path)}"
 }
@@ -10,7 +10,7 @@ resource "aws_key_pair" "public_key_auth" {
 resource "aws_instance" "instance" {
     ami = "${var.ami}"
     instance_type = "${var.instance_type}"
-    key_name = "${aws_key_pair.public_key_auth.id}"
+    key_name = "${aws_key_pair.public_key_auth_1.id}"
      provisioner "file" {
       source      = "setup.sh"
       destination = "/tmp/setup.sh"

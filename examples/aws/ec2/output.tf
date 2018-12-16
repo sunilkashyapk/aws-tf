@@ -1,4 +1,4 @@
-output "Ec2 instance IP Address"{
+output "EC2 instance IP Address"{
     value = "${aws_instance.instance.public_ip}"
 }
 
